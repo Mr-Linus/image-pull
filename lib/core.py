@@ -32,7 +32,7 @@ def Sync(ImageName):
         image = docker_client.images.pull(ImageName)
         image.tag(repository=settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename, tag=tag)
         docker_client.images.push(repository=settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename, tag=tag)
-        docker_client.images.remove(settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename+":"+tag)
+        docker_client.images.remove(ImageName)
         return 0, settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename+":"+tag
     except:
         print("Sync Error!")
