@@ -26,10 +26,13 @@ def Check(ImageName):
             return 0, settings.RepoUrl + "/" + settings.RepoNamespace + "/" + image + ":" + tag
     except ServerException:
         print("The image repo does not exists,trying to create it.")
+        """
         request = CreateRepoRequest.CreateRepoRequest()
         request.add_path_param("RepoName", image+"/")
         response = eval(client.AcsClient(settings.id, settings.key, 'cn-hangzhou').do_action_with_exception(request).
                         decode('utf-8'))
+        """
+        return 1, ""
 
 
 def Sync(ImageName):
