@@ -9,7 +9,7 @@ def Check(ImageName):
     client.region_provider.add_endpoint(settings.Product_name,
                                         settings.Region_id,
                                         settings.End_point)
-    namespace, nametag = ImageName.split('/')
+    namespace, nametag = ImageName.split('/')[-2:]
     image, tag = nametag.split(':')
     try:
         request = GetImageLayerRequest.GetImageLayerRequest()
@@ -36,7 +36,7 @@ def Check(ImageName):
 
 
 def Sync(ImageName):
-    namespace, nametag = ImageName.split('/')
+    namespace, nametag = ImageName.split('/')[-2:]
     imagename, tag = nametag.split(':')
     docker_client = docker.from_env()
     try:
@@ -56,3 +56,4 @@ def Sync(ImageName):
 
 if __name__ == '__main__':
     Check(ImageName="k8s.gcr.io/kube-proxy-amd64:v1.11.0")
+    #print("quay.io/coreos/flannel:123".split("/")[-2:])
