@@ -1,0 +1,20 @@
+syntax = "proto3";
+// The ImagePull service definition.
+service ImagePull {
+  // Sends a Query
+  rpc CheckImageExists (ImageName) returns (Results) {}
+  rpc PullImage(ImageName) returns (Results) {}
+}
+
+// The response message containing the ImagePull
+
+
+message ImageName {
+  string Image = 1;
+}
+
+message Results {
+  bool stats = 2;
+  string ImageMirrorName = 3;
+}
+

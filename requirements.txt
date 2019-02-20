@@ -1,0 +1,5 @@
+grpcio==1.18.0
+grpcio-tools==1.18.0
+docker==3.3.0
+aliyun-python-sdk-cr==3.0.0
+aliyun-python-sdk-core-v3==2.8.9
