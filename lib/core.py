@@ -56,4 +56,4 @@ def Sync(ImageName):
 
 if __name__ == '__main__':
     Check(ImageName="k8s.gcr.io/kube-proxy-amd64:v1.11.0")
-    #print("quay.io/coreos/flannel:123".split("/")[-2:])
+    # print("quay.io/coreos/flannel:lastest".split("/")[-2:])

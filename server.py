@@ -1,7 +1,7 @@
 from concurrent import futures
 import time
 import logging
-
+import settings
 import grpc
 import grpc_lib.image_pull_pb2 as image_pull_pb2
 import grpc_lib.image_pull_pb2_grpc as image_pull_pb2_grpc
@@ -23,8 +23,9 @@ class ImagePull(image_pull_pb2_grpc.ImagePullServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     image_pull_pb2_grpc.add_ImagePullServicer_to_server(ImagePull(), server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port(settings.server_listen)
     server.start()
+    print("Server starts listening at: "+settings.server_listen)
     try:
         while True:
             time.sleep(_ONE_DAY_IN_SECONDS)
