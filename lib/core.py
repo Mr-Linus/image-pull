@@ -16,10 +16,10 @@ def Check(ImageName):
     response = eval(client.AcsClient(settings.id, settings.key, 'cn-hangzhou').do_action_with_exception(request).
                     decode('utf-8'))
     if response['data']['image'] == {}:
-        print("This tag does not exist.")
+        print("This tag does not exist,Trying to call sync it.")
         return 1, ""
     else:
-        print("Mirror Image is: "+settings.RepoUrl+"/"+settings.RepoNamespace+"/"+image+":"+tag)
+        print("Mirror Image Exist: "+settings.RepoUrl+"/"+settings.RepoNamespace+"/"+image+":"+tag)
         return 0, settings.RepoUrl+"/"+settings.RepoNamespace+"/"+image+":"+tag
 
 
@@ -29,8 +29,10 @@ def Sync(ImageName):
     docker_client = docker.from_env()
     try:
         docker_client.api.login(username=settings.username, password=settings.password, registry=settings.RepoUrl)
+        print("Pulling image: "+ImageName)
         image = docker_client.images.pull(ImageName)
         image.tag(repository=settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename, tag=tag)
+        print("Pushing image: "+settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename+":"+tag)
         docker_client.images.push(repository=settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename, tag=tag)
         docker_client.images.remove(settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename+":"+tag)
         docker_client.images.remove(ImageName)
