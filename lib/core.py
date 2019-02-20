@@ -10,7 +10,12 @@ def Check(ImageName):
                                         settings.Region_id,
                                         settings.End_point)
     namespace, nametag = ImageName.split('/')[-2:]
-    image, tag = nametag.split(':')
+    try:
+        image, tag = nametag.split(':')
+    except:
+        print("Image Name Error: "+ImageName)
+    if tag is None:
+        tag = "latest"
     try:
         request = GetImageLayerRequest.GetImageLayerRequest()
         request.set_RepoName(image)
@@ -37,7 +42,11 @@ def Check(ImageName):
 
 def Sync(ImageName):
     namespace, nametag = ImageName.split('/')[-2:]
-    imagename, tag = nametag.split(':')
+    try:
+        imagename, tag = nametag.split(':')
+    except:
+        print("Image Name Error: "+ImageName)
+        return 1, ""
     docker_client = docker.from_env()
     try:
         docker_client.api.login(username=settings.username, password=settings.password, registry=settings.RepoUrl)
@@ -48,6 +57,7 @@ def Sync(ImageName):
         docker_client.images.push(repository=settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename, tag=tag)
         docker_client.images.remove(settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename+":"+tag)
         docker_client.images.remove(ImageName)
+        print("Done!")
         return 0, settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename+":"+tag
     except:
         print("Sync Error!")

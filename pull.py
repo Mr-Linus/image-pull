@@ -40,7 +40,7 @@ def run(host, image_name):
 
 def main():
     parser = optparse.OptionParser(
-        'usage: pull.py -i <imagename> [-h <mirror server>]'
+        'usage: pull.py -i <imagename> e.g: quay.io/coreos/flannel:v0.11.0 [-h <mirror server>]'
     )
     parser.add_option('-i', dest='image', type="string", help='specify images')
     parser.add_option('-s', dest='host', type="string", help='specify host')
