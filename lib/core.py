@@ -1,5 +1,5 @@
 import docker
-import settings
+from .. import settings
 from aliyunsdkcore import client
 from aliyunsdkcr.request.v20160607 import GetImageLayerRequest
 
