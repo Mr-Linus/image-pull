@@ -1,5 +1,5 @@
 ## image-pull
-基于GRPC用于推拉 k8s.gcr.io 与 quay.io仓库的镜像工具。
+基于 GRPC/Python 开发，用于拉取 k8s.gcr.io、 quay.io等境外仓库中的镜像工具。
 
 
 ### Usage
