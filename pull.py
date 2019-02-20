@@ -1,6 +1,5 @@
 from __future__ import print_function
 import docker
-import logging
 import settings
 import optparse
 import grpc

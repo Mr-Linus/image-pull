@@ -1,7 +1,8 @@
 ## image-pull
 基于 GRPC/Python3 开发，用于拉取 k8s.gcr.io、 quay.io等境外仓库中的镜像工具。
 
-
+### 工作原理
+![image](./image-pull.jpg)
 ### 用法
 拉取镜像：quay.io/coreos/flannel:v0.11.0
 ```python
