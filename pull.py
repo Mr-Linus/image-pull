@@ -26,13 +26,20 @@ def run(host, image):
 
 def main():
     parser = optparse.OptionParser(
-        'usage: pull.py -i <imagename> -h <mirror server>'
+        'usage: pull.py -i <imagename> [-h <mirror server>]'
     )
-    parser.add_option('-i', dest='image', type='string', help='specify images')
-    parser.add_option('-h', dest='host', type='string', help='specify host')
+    parser.add_option('-i', dest='image', type="string", help='specify images')
+    parser.add_option('-s', dest='host', type="string", help='specify host')
     (options, args) = parser.parse_args()
-    if options.host == "":
-        run(settings.host, options.image)
+    if options.host is None:
+        if options.image is None:
+            print(parser.usage)
+        else:
+
+            run(settings.host, options.image)
     else:
         run(options.host, options.image)
 
+
+if __name__ == '__main__':
+    main()

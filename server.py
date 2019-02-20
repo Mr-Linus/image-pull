@@ -13,11 +13,11 @@ _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 class ImagePull(image_pull_pb2_grpc.ImagePullServicer):
     def CheckImageExists(self, request, context):
         stats, name = Check(request.Image)
-        return image_pull_pb2.Results(stats=stats, ImageName=name)
+        return image_pull_pb2.Results(stats=stats, ImageMirrorName=name)
 
     def PullImage(self, request, context):
         stats, name = Sync(request.Image)
-        return image_pull_pb2.Results(stats=stats, ImageName=name)
+        return image_pull_pb2.Results(stats=stats, ImageMirrorName=name)
 
 
 def serve():
