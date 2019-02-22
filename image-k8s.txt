@@ -1,0 +1,8 @@
+ k8s.gcr.io/kube-apiserver-amd64:latest
+ k8s.gcr.io/kube-controller-manager-amd64:latest
+ k8s.gcr.io/kube-scheduler-amd64:latest
+ k8s.gcr.io/kube-proxy-amd64:latest
+ k8s.gcr.io/pause:latest
+ k8s.gcr.io/etcd-amd64:latest
+ k8s.gcr.io/coredns:latest
+ k8s.gcr.io/kubernetes-dashboard-amd64:latest

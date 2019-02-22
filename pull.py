@@ -53,19 +53,21 @@ def main():
     elif (options.host is not None) and (options.image is None) and (options.filename is not None):
         try:
             with open(options.filename) as f:
-                line = f.readline()
+                line = f.readline().replace('\n', '')
                 while line:
                     print("Get image:"+line)
                     run(options.host, line)
+                    line = f.readline().replace('\n', '')
         except:
             print("Read the file:"+options.filename+" Error!")
     elif (options.host is None) and (options.image is None) and (options.filename is not None):
         try:
             with open(options.filename) as f:
-                line = f.readline()
+                line = f.readline().replace('\n', '')
                 while line:
                     print("Get image:" + line)
                     run(settings.host, line)
+                    line = f.readline().replace('\n', '')
         except:
             print("Read the file:" + options.filename + " Error!")
     else:
