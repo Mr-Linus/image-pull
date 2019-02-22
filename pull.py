@@ -39,19 +39,38 @@ def run(host, image_name):
 
 def main():
     parser = optparse.OptionParser(
-        'usage: pull.py -i <imagename> e.g: quay.io/coreos/flannel:v0.11.0 [-h <mirror server>]'
+        'usage: pull.py -i <imagename> e.g: quay.io/coreos/flannel:v0.11.0 [-f <imagename-file>] | [-h <mirror server>]'
     )
     parser.add_option('-i', dest='image', type="string", help='specify images')
     parser.add_option('-s', dest='host', type="string", help='specify host')
+    parser.add_option('-f', dest='filename', metavar="FILE", help='specify image-name file')
     (options, args) = parser.parse_args()
-    if options.host is None:
-        if options.image is None:
-            print(parser.usage)
-        else:
+    if (options.host is None) and (options.image is not None) and (options.filename is None):
+        run(settings.host, options.image)
 
-            run(settings.host, options.image)
-    else:
+    elif (options.host is not None) and (options.image is not None) and (options.filename is None):
         run(options.host, options.image)
+    elif (options.host is not None) and (options.image is None) and (options.filename is not None):
+        try:
+            with open(options.filename) as f:
+                line = f.readline()
+                while line:
+                    print("Get image:"+line)
+                    run(options.host, line)
+        except:
+            print("Read the file:"+options.filename+" Error!")
+    elif (options.host is None) and (options.image is None) and (options.filename is not None):
+        try:
+            with open(options.filename) as f:
+                line = f.readline()
+                while line:
+                    print("Get image:" + line)
+                    run(settings.host, line)
+        except:
+            print("Read the file:" + options.filename + " Error!")
+    else:
+        print(parser.usage)
+        print(options.filename)
 
 
 if __name__ == '__main__':

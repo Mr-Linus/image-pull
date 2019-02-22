@@ -4,13 +4,26 @@
 ### 工作原理
 ![image](./image-pull.jpg)
 ### 用法
+- 通过命令行拉取指定镜像：
+
 拉取镜像：quay.io/coreos/flannel:v0.11.0
 ```python
 python3 pull.py \
         -i quay.io/coreos/flannel:v0.11.0 \ 
         -s mirrors.geekcloud.top
 ```
-
+- 通过文件拉取指定镜像
+```python
+python3 pull.py \
+        -f image-k8s.txt \ 
+        -s mirrors.geekcloud.top
+```
+> image-k8s.txt (每行一个镜像名)
+```text
+hello-world:latest
+quay.io/coreos/flannel:v0.11.0
+quay.io/coreos/flannel:v0.12.0
+```
 ### 境外服务器节点部署
 - 配置
 重命名`settings-example.py`文件为`settings.py`，并设置相关参数
