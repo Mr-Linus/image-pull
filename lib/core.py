@@ -9,8 +9,9 @@ def Check(ImageName):
     client.region_provider.add_endpoint(settings.Product_name,
                                         settings.Region_id,
                                         settings.End_point)
-    namespace, nametag = ImageName.split('/')[-2:]
+
     try:
+        namespace, nametag = ImageName.split('/')[-2:]
         image, tag = nametag.split(':')
     except:
         print("Image Name Error: "+ImageName)
@@ -41,8 +42,9 @@ def Check(ImageName):
 
 
 def Sync(ImageName):
-    namespace, nametag = ImageName.split('/')[-2:]
+
     try:
+        namespace, nametag = ImageName.split('/')[-2:]
         imagename, tag = nametag.split(':')
     except:
         print("Image Name Error: "+ImageName)

@@ -18,19 +18,28 @@ def run(host, image_name):
             image_object = client.images.pull(response.ImageMirrorName)
             repo, tag = image_name.split(":")
             print("Changing the image's tag...")
-            image_object.tag(repository=repo, tag=tag)
+            try:
+                image_object.tag(repository=repo, tag=tag)
+            except:
+                print("Change Tag error!The Image Name maybe exist.")
             client.images.remove(response.ImageMirrorName)
             print("Done.")
         else:
+            print("The image does not exist in the repository, \n" +
+                  "try to pull from the original Repo: \n" +
+                  image_name)
             response = stub.PullImage(image_pull_pb2.ImageName(Image=image_name))
             if response.stats == 0:
-                print("Mirror image is:" + response.ImageMirrorName)
+                print("Sync Finished,Mirror image is:" + response.ImageMirrorName)
                 client = docker.client.from_env()
                 print("Pulling images...")
                 image_object = client.images.pull(response.ImageMirrorName)
                 print("Changing the image's tag...")
                 repo, tag = image_name.split(":")
-                image_object.tag(repository=repo, tag=tag)
+                try:
+                    image_object.tag(repository=repo, tag=tag)
+                except:
+                    print("Change Tag error!The Image Name maybe exist.")
                 client.images.remove(response.ImageMirrorName)
                 print("Done.")
             else:
@@ -45,34 +54,24 @@ def main():
     parser.add_option('-s', dest='host', type="string", help='specify host')
     parser.add_option('-f', dest='filename', metavar="FILE", help='specify image-name file')
     (options, args) = parser.parse_args()
-    if (options.host is None) and (options.image is not None) and (options.filename is None):
-        run(settings.host, options.image)
-
-    elif (options.host is not None) and (options.image is not None) and (options.filename is None):
-        run(options.host, options.image)
-    elif (options.host is not None) and (options.image is None) and (options.filename is not None):
+    if options.host is None:
+        host = settings.host
+    else:
+        host = options.host
+    if (options.image is not None) and (options.filename is None):
+        run(host, options.image)
+    elif (options.image is None) and (options.filename is not None):
         try:
             with open(options.filename) as f:
                 line = f.readline().replace('\n', '')
                 while line:
                     print("Get image:"+line)
-                    run(options.host, line)
+                    run(host, str(line))
                     line = f.readline().replace('\n', '')
         except:
-            print("Read the file:"+options.filename+" Error!")
-    elif (options.host is None) and (options.image is None) and (options.filename is not None):
-        try:
-            with open(options.filename) as f:
-                line = f.readline().replace('\n', '')
-                while line:
-                    print("Get image:" + line)
-                    run(settings.host, line)
-                    line = f.readline().replace('\n', '')
-        except:
-            print("Read the file:" + options.filename + " Error!")
+            print("Read the file:"+options.filename+" Error! or Docker is not running!")
     else:
         print(parser.usage)
-        print(options.filename)
 
 
 if __name__ == '__main__':
