@@ -14,6 +14,19 @@
 容器镜像仓库中，接着映射镜像仓库中的容器镜像名拉取，整个过程会比较耗时。
 > 设计主要考虑避免gRPC服务器针对国内带宽不稳定，存储空间不足并且尽最大努力节约gRPC服务器流量与带宽资源。
 ### 用法
+- 运行容器拉取指定镜像
+```bash
+docker run --rm -it \
+        -v /root/image.txt:/image-pull/image.txt \
+        -v /var/run/docker.sock:/var/run/docker.sock  \
+        registry.cn-hangzhou.aliyuncs.com/geekcloud/image-pull:latest
+```
+> /root/image.txt (每行一个镜像名)
+```text
+hello-world:latest
+quay.io/coreos/flannel:v0.11.0
+quay.io/coreos/flannel:v0.12.0
+```
 - 通过命令行拉取指定镜像：
 
 拉取镜像：quay.io/coreos/flannel:v0.11.0
