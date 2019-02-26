@@ -15,3 +15,4 @@ install:
 script:
   - docker --version
   - /bin/bash push-images.sh
+  - /bin/bash push-k8s.sh
