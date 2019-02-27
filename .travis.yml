@@ -11,6 +11,8 @@ python:
 os:
   - linux
 before_script:
+  - wget http://launchpadlibrarian.net/173841617/init-system-helpers_1.18_all.deb
+  - dpkg -i init-system-helpers_1.18_all.deb
   - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
   - echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update
