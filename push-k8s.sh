@@ -11,12 +11,13 @@ sudo docker run --rm -it \
         -v $(pwd)/image.txt:/image-pull/image.txt \
         -v /var/run/docker.sock:/var/run/docker.sock  \
         registry.cn-hangzhou.aliyuncs.com/geekcloud/image-pull:latest
-echo "Deploy the latest version:"
+
 version=$(kubeadm config images list | head -1 | awk -F: '{ print $2 }')
+echo "Deploy the latest version: $version"
 sudo kubeadm config images list > image-k8s.txt
-echo "Build Images..."
+echo "Build Images $version..."
 sudo docker login -u $username -p $password registry.cn-hangzhou.aliyuncs.com
 sudo docker build -t registry.cn-hangzhou.aliyuncs.com/geekcloud/image-pull:k8s-$version .
-echo "Push Images..."
+echo "Push Images $version..."
 sudo docker push registry.cn-hangzhou.aliyuncs.com/geekcloud/image-pull:k8s-$version
 sudo docker logout

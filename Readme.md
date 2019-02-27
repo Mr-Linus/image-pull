@@ -23,9 +23,13 @@ docker run --rm -it \
 ```
 > /root/image.txt (每行一个镜像名)
 ```text
-hello-world:latest
-quay.io/coreos/flannel:v0.11.0
-quay.io/coreos/flannel:v0.12.0
+k8s.gcr.io/kube-apiserver:v1.13.3
+k8s.gcr.io/kube-controller-manager:v1.13.3
+k8s.gcr.io/kube-scheduler:v1.13.3
+k8s.gcr.io/kube-proxy:v1.13.3
+k8s.gcr.io/pause:3.1
+k8s.gcr.io/etcd:3.2.24
+k8s.gcr.io/coredns:1.2.6
 ```
 - 通过命令行拉取指定镜像：
 
@@ -43,9 +47,13 @@ python3 pull.py \
 ```
 > image-k8s.txt (每行一个镜像名)
 ```text
-hello-world:latest
-quay.io/coreos/flannel:v0.11.0
-quay.io/coreos/flannel:v0.12.0
+k8s.gcr.io/kube-apiserver:v1.13.3
+k8s.gcr.io/kube-controller-manager:v1.13.3
+k8s.gcr.io/kube-scheduler:v1.13.3
+k8s.gcr.io/kube-proxy:v1.13.3
+k8s.gcr.io/pause:3.1
+k8s.gcr.io/etcd:3.2.24
+k8s.gcr.io/coredns:1.2.6
 ```
 ### 境外服务器节点部署
 - 配置
