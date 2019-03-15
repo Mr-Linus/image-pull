@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2cbf1e51-722f-4c99-9a5d-f840019079ca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dockerfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+            <state>
+              <caret column="22" selection-start-column="22" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -39,7 +40,7 @@
         <entry file="file://$PROJECT_DIR$/Readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="242">
+              <first_editor relative-caret-position="770">
                 <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
               </first_editor>
               <second_editor />
@@ -47,7 +48,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/push-k8s.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="484">
@@ -95,17 +96,17 @@
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/image-k8s.txt" />
         <option value="$PROJECT_DIR$/push-images.sh" />
-        <option value="$PROJECT_DIR$/dockerfile" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/push-k8s.sh" />
         <option value="$PROJECT_DIR$/Readme.md" />
         <option value="$PROJECT_DIR$/bash/pull-cni.sh" />
+        <option value="$PROJECT_DIR$/dockerfile" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="45" />
-    <option name="y" value="427" />
+    <option name="x" value="51" />
+    <option name="y" value="38" />
     <option name="width" value="1619" />
     <option name="height" value="1027" />
   </component>
@@ -276,16 +277,17 @@
       <workItem from="1551243485981" duration="2877000" />
       <workItem from="1551270568476" duration="117000" />
       <workItem from="1551343745996" duration="258000" />
+      <workItem from="1552614287761" duration="64000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36833000" />
+    <option name="totallyTimeSpent" value="36897000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2429" y="-114" width="1680" height="1027" extended-state="0" />
+    <frame x="51" y="38" width="1619" height="1027" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33577535" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33988586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -502,6 +504,7 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bash/pull-cni.sh" />
     <entry file="file://$PROJECT_DIR$/image-k8s.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -509,10 +512,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dockerfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+    <entry file="file://$PROJECT_DIR$/Readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="770">
+            <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -523,23 +529,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bash/pull-cni.sh">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Readme.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="242">
-            <caret line="35" column="30" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="30" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/push-k8s.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
           <caret line="22" column="18" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="22" selection-start-column="22" selection-end-column="22" />
         </state>
       </provider>
     </entry>
