@@ -58,9 +58,7 @@ def main():
         host = settings.host
     else:
         host = options.host
-    if (options.image is not None) and (options.filename is None):
-        run(host, options.image)
-    elif (options.image is None) and (options.filename is not None):
+    if (options.image is None) and (options.filename is not None):
         try:
             with open(options.filename) as f:
                 line = f.readline().replace('\n', '')
@@ -70,6 +68,8 @@ def main():
                     line = f.readline().replace('\n', '')
         except:
             print("Read the file:"+options.filename+" Error! or Docker is not running!")
+    elif options.filename is None:
+        run(host, options.image)
     else:
         print(parser.usage)
 
