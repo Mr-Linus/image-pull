@@ -16,5 +16,4 @@ RUN mv /${PROJECT_NAME}/settings-example.py /${PROJECT_NAME}/settings.py \
     && pip install -r /${PROJECT_NAME}/requirements.txt
 
 
-ENTRYPOINT ["python", "/image-pull/pull.py" "-s", "mirrors.geekcloud.top","-f", "/image-pull/image.txt","-i"]
-CMD [" "]
+ENTRYPOINT ["python", "/image-pull/pull.py" "-s", "mirrors.geekcloud.top","-f", "/image-pull/image.txt"]
