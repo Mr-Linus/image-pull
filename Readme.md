@@ -32,28 +32,12 @@ k8s.gcr.io/etcd:3.2.24
 k8s.gcr.io/coredns:1.2.6
 ```
 - 通过命令行拉取指定镜像：
-
-拉取镜像：quay.io/coreos/flannel:v0.11.0
-```python
-python3 pull.py \
-        -i quay.io/coreos/flannel:v0.11.0 \ 
-        -s mirrors.geekcloud.top
-```
-- 通过文件拉取指定镜像
-```python
-python3 pull.py \
-        -f image-k8s.txt \ 
-        -s mirrors.geekcloud.top
-```
-> image-k8s.txt (每行一个镜像名)
-```text
-k8s.gcr.io/kube-apiserver:v1.13.3
-k8s.gcr.io/kube-controller-manager:v1.13.3
-k8s.gcr.io/kube-scheduler:v1.13.3
-k8s.gcr.io/kube-proxy:v1.13.3
-k8s.gcr.io/pause:3.1
-k8s.gcr.io/etcd:3.2.24
-k8s.gcr.io/coredns:1.2.6
+```bash
+docker run --rm -it \
+       -v /var/run/docker.sock:/var/run/docker.sock \
+       registry.cn-hangzhou.aliyuncs.com/geekcloud/image-pull:latest \
+       gcr.io/kubernetes-helm/tiller:v2.13.0
+# 这里的 gcr.io/kubernetes-helm/tiller:v2.13.0 为你想要拉取的镜像
 ```
 ### 境外服务器节点部署
 - 配置
