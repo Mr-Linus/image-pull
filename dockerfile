@@ -17,4 +17,3 @@ RUN mv /${PROJECT_NAME}/settings-example.py /${PROJECT_NAME}/settings.py \
 
 
 ENTRYPOINT ["python", "/image-pull/pull.py" "-s", "mirrors.geekcloud.top","-f", "/image-pull/image.txt"]
-CMD ["-i"]
