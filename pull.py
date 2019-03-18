@@ -68,7 +68,7 @@ def main():
                     line = f.readline().replace('\n', '')
         except:
             print("Read the file:"+options.filename+" Error! or Docker is not running!")
-    elif options.filename is None:
+    elif options.image is not None:
         run(host, options.image)
     else:
         print(parser.usage)
