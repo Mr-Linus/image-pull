@@ -69,7 +69,18 @@ def main():
         except:
             print("Read the file:"+options.filename+" Error! or Docker is not running!")
     elif options.image is not None:
-        run(host, options.image)
+        if (options.image is " ") and (options.filename is not None):
+            try:
+                with open(options.filename) as f:
+                    line = f.readline().replace('\n', '')
+                    while line:
+                        print("Get image:" + line)
+                        run(host, str(line))
+                        line = f.readline().replace('\n', '')
+            except:
+                print("Read the file:" + options.filename + " Error! or Docker is not running!")
+        else:
+            run(host, options.image)
     else:
         print(parser.usage)
 
