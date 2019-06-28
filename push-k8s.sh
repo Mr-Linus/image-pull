@@ -6,7 +6,7 @@ version=v1.14.3
 vv=1.14.3-00
 echo "Install kubeadm & push images.."
 sudo apt-get update
-sudo apt-get install -y kubelet=$vv kubeadm=$vv kubectl
+sudo apt-get install -y kubelet=$vv kubeadm=$vv kubectl=$vv
 sudo apt-mark hold kubelet kubeadm kubectl
 sudo kubeadm config images list > image.txt
 sudo docker run --rm -it \
