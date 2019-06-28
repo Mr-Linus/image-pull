@@ -5,7 +5,7 @@ sudo apt-get update && sudo apt-get install -y apt-transport-https curl
 version=v1.14.3
 echo "Install kubeadm & push images.."
 sudo apt-get update
-sudo apt-get install -y kubelet=$version-00 kubeadm=$version--00 kubectl
+sudo apt-get install -y kubelet=$version kubeadm=$version kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 sudo kubeadm config images list > image.txt
 sudo docker run --rm -it \
