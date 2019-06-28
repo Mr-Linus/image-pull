@@ -8,6 +8,7 @@ echo "Install kubeadm & push images.."
 sudo apt-get update
 sudo apt-get install -y kubelet=$vv kubeadm=$vv kubectl=$vv
 sudo apt-mark hold kubelet kubeadm kubectl
+kubeadm config images list
 sudo kubeadm config images list > image.txt
 sudo docker run --rm -it \
         -v $(pwd)/image.txt:/image-pull/image.txt \
