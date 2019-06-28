@@ -2,9 +2,10 @@
 sudo swapoff -a
 echo "Update System.."
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+version=v1.14.3
 echo "Install kubeadm & push images.."
 sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet=$version-00 kubeadm=$version--00 kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 sudo kubeadm config images list > image.txt
 sudo docker run --rm -it \
@@ -12,7 +13,7 @@ sudo docker run --rm -it \
         -v /var/run/docker.sock:/var/run/docker.sock  \
         registry.cn-hangzhou.aliyuncs.com/geekcloud/image-pull:latest
 
-version=$(kubeadm config images list | head -1 | awk -F: '{ print $2 }')
+#version=$(kubeadm config images list | head -1 | awk -F: '{ print $2 }')
 echo "Deploy the latest version: $version"
 sudo kubeadm config images list > image-k8s.txt
 echo "Build Images $version..."
