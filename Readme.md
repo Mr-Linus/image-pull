@@ -39,7 +39,8 @@ docker run --rm -it \
        gcr.io/kubernetes-helm/tiller:v2.13.0
 # 这里的 gcr.io/kubernetes-helm/tiller:v2.13.0 为你想要拉取的镜像
 ```
-### 境外服务器节点部署
+### （自定义）境外服务器节点部署
+上面的用法是使用的本人搭建的境外服务器，如果您想自己搭建服务器你可以查看如下步骤：
 - 配置
 重命名`settings-example.py`文件为`settings.py`，并设置相关参数
 ```bash
@@ -72,3 +73,6 @@ host= "www.example.com"
 pip3 install -r requirements.txt
 python3 server.py
 ```
+
+- 客户端修改
+重新构建 dockerfile: 将 dockerfile 倒数第二行中的 "mirrors.geekcloud.top" 改为你自己的境外服务器地址或域名,再重新 build 生成你自己的客户端镜像即可。
