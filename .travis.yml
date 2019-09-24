@@ -11,11 +11,12 @@ python:
 os:
   - linux
 before_script:
-  - wget http://launchpadlibrarian.net/173841617/init-system-helpers_1.18_all.deb
-  - sudo dpkg -i init-system-helpers_1.18_all.deb
+  - sudo apt-get update && sudo apt-get install -y apt-transport-https curl
   - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
   - echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update
+  - sudo apt-get install -y kubelet kubeadm kubectl
+  - sudo apt-mark hold kubelet kubeadm kubectl
 install:
   - pip install -r requirements.txt
 script:
