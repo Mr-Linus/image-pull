@@ -2,7 +2,7 @@ import docker
 import settings
 from aliyunsdkcore import client
 from aliyunsdkcore.acs_exception.exceptions import ServerException
-from aliyunsdkcr.request.v20160607 import GetImageLayerRequest,CreateRepoRequest
+from aliyunsdkcr.request.v20160607 import GetImageLayerRequest, CreateRepoRequest
 
 
 def Check(ImageName):
@@ -13,8 +13,8 @@ def Check(ImageName):
     try:
         namespace, nametag = ImageName.split('/')[-2:]
         image, tag = nametag.split(':')
-    except:
-        print("Image Name Error: "+ImageName)
+    except BaseException:
+        print("Image Name Error: " + ImageName)
     if tag is None:
         tag = "latest"
     try:
@@ -22,13 +22,24 @@ def Check(ImageName):
         request.set_RepoName(image)
         request.set_RepoNamespace(settings.RepoNamespace)
         request.set_Tag(tag)
-        response = eval(client.AcsClient(settings.id, settings.key, 'cn-hangzhou').do_action_with_exception(request).
-                    decode('utf-8'))
+        response = eval(
+            client.AcsClient(
+                settings.id,
+                settings.key,
+                'cn-hangzhou').do_action_with_exception(request). decode('utf-8'))
         if response['data']['image'] == {}:
             print("This tag does not exist,Trying to call sync it.")
             return 1, ""
         else:
-            print("Mirror Image Exist: " + settings.RepoUrl + "/" + settings.RepoNamespace + "/" + image + ":" + tag)
+            print(
+                "Mirror Image Exist: " +
+                settings.RepoUrl +
+                "/" +
+                settings.RepoNamespace +
+                "/" +
+                image +
+                ":" +
+                tag)
             return 0, settings.RepoUrl + "/" + settings.RepoNamespace + "/" + image + ":" + tag
     except ServerException:
         print("The image repo does not exists,trying to create it.")
@@ -46,22 +57,53 @@ def Sync(ImageName):
     try:
         namespace, nametag = ImageName.split('/')[-2:]
         imagename, tag = nametag.split(':')
-    except:
-        print("Image Name Error: "+ImageName)
+    except BaseException:
+        print("Image Name Error: " + ImageName)
         return 1, ""
     docker_client = docker.from_env()
     try:
-        docker_client.api.login(username=settings.username, password=settings.password, registry=settings.RepoUrl)
-        print("Pulling image: "+ImageName)
+        docker_client.api.login(
+            username=settings.username,
+            password=settings.password,
+            registry=settings.RepoUrl)
+        print("Pulling image: " + ImageName)
         image = docker_client.images.pull(ImageName)
-        image.tag(repository=settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename, tag=tag)
-        print("Pushing image: "+settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename+":"+tag)
-        docker_client.images.push(repository=settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename, tag=tag)
-        docker_client.images.remove(settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename+":"+tag)
+        image.tag(
+            repository=settings.RepoUrl +
+            "/" +
+            settings.RepoNamespace +
+            "/" +
+            imagename,
+            tag=tag)
+        print(
+            "Pushing image: " +
+            settings.RepoUrl +
+            "/" +
+            settings.RepoNamespace +
+            "/" +
+            imagename +
+            ":" +
+            tag)
+        docker_client.images.push(
+            repository=settings.RepoUrl +
+            "/" +
+            settings.RepoNamespace +
+            "/" +
+            imagename,
+            tag=tag)
+        docker_client.images.remove(
+            settings.RepoUrl +
+            "/" +
+            settings.RepoNamespace +
+            "/" +
+            imagename +
+            ":" +
+            tag)
         docker_client.images.remove(ImageName)
         print("Done!")
-        return 0, settings.RepoUrl+"/"+settings.RepoNamespace+"/"+imagename+":"+tag
-    except:
+        return 0, settings.RepoUrl + "/" + \
+            settings.RepoNamespace + "/" + imagename + ":" + tag
+    except BaseException:
         print("Sync Error!")
         return 1, ""
 
