@@ -1,6 +1,6 @@
 FROM python:3.6-slim
 
-LABEL maintainer="Mr-Linus admin@geekfan.club"
+LABEL maintainer="Mr-Linus admin@run-linux.com"
 
 ARG TZ="Asia/Shanghai"
 
