@@ -1,5 +1,8 @@
 name: Github Action CI
-on: push
+on: 
+  push:
+  schedule:
+  - cron:  '30 21 * * *'
 
 jobs:
   build:
