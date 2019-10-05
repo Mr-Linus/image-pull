@@ -29,7 +29,7 @@ jobs:
         sudo apt-get update -y
         sudo apt-get install docker-ce docker-ce-cli containerd.io -y
         docker version
-        echo $password | sudo docker login "registry.cn-hangzhou.aliyuncs.com" -u "$username" --password-stdin 
+        echo $password | sudo docker login "registry.cn-hangzhou.aliyuncs.com" --username "$username" --password-stdin 
     - name: Build Kubeadm ENV
       run: |
         sudo apt-get update && sudo apt-get install -y apt-transport-https curl
