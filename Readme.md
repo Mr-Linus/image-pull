@@ -1,5 +1,5 @@
 ## image-pull
-基于 GRPC/Python3 开发，用于拉取 k8s.gcr.io、 quay.io等境外仓库中的镜像工具。
+基于 gRPC/Python3 开发，用于拉取 k8s.gcr.io、 quay.io等境外仓库中的镜像工具。
 
 ![build](https://www.travis-ci.com/Mr-Linus/image-pull.svg?branch=master)
 
@@ -74,5 +74,8 @@ pip3 install -r requirements.txt
 python3 server.py
 ```
 
-- 客户端修改
-重新构建 dockerfile: 将 dockerfile 倒数第二行中的 "mirrors.geekcloud.top" 改为你自己的境外服务器地址或域名,再重新 build 生成你自己的客户端镜像即可。
+- 客户端设置
+
+重新构建 dockerfile: 
+
+将 dockerfile 倒数第二行中的 "mirrors.geekcloud.top" 改为你自己的境外服务器地址或域名,再重新 build 生成你自己的客户端镜像即可。
