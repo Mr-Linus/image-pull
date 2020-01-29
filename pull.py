@@ -1,6 +1,5 @@
 from __future__ import print_function
 import docker
-import settings
 import optparse
 import grpc
 import grpc_lib.image_pull_pb2 as image_pull_pb2
@@ -64,10 +63,7 @@ def main():
         metavar="FILE",
         help='specify image-name file')
     (options, args) = parser.parse_args()
-    if options.host is None:
-        host = settings.host
-    else:
-        host = options.host
+    host = options.host
     if (options.image is None) and (options.filename is not None):
         try:
             with open(options.filename) as f:
