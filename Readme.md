@@ -78,4 +78,4 @@ python3 server.py
 
 重新构建 dockerfile: 
 
-将 dockerfile 倒数第二行中的 "mirrors.geekcloud.top" 改为你自己的境外服务器地址或域名,再重新 build 生成你自己的客户端镜像即可。
+将 dockerfile 倒数第二行中的 "azure.geekcloud.top" 改为你自己的境外服务器地址或域名,再重新 build 生成你自己的客户端镜像即可。
