@@ -1,20 +1,14 @@
 import docker
 import settings
-from aliyunsdkcore import client
+from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.acs_exception.exceptions import ServerException
-from aliyunsdkcr.request.v20160607 import GetImageLayerRequest, CreateRepoRequest
+from aliyunsdkcr.request.v20160607 import GetImageLayerRequest
 
 
 def Check(ImageName):
-    client.region_provider.add_endpoint(settings.Product_name,
-                                        settings.Region_id,
-                                        settings.End_point)
-
-    try:
-        namespace, nametag = ImageName.split('/')[-2:]
-        image, tag = nametag.split(':')
-    except BaseException:
-        print("Image Name Error: " + ImageName)
+    apiClient = AcsClient(settings.id, settings.key, settings.Region_id)
+    namespace, nametag = ImageName.split('/')[-2:]
+    image, tag = nametag.split(':')
     if tag is None:
         tag = "latest"
     try:
@@ -22,11 +16,8 @@ def Check(ImageName):
         request.set_RepoName(image)
         request.set_RepoNamespace(settings.RepoNamespace)
         request.set_Tag(tag)
-        response = eval(
-            client.AcsClient(
-                settings.id,
-                settings.key,
-                'cn-hangzhou').do_action_with_exception(request). decode('utf-8'))
+        request.set_endpoint(settings.End_point)
+        response = eval(apiClient.do_action_with_exception(request). decode('utf-8'))
         if response['data']['image'] == {}:
             print("This tag does not exist,Trying to call sync it.")
             return 1, ""

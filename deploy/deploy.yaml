@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: image-pull
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-pull
+  namespace: image-pull
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: image-pull
+  template:
+    metadata:
+      labels:
+        app: image-pull
+    spec:
+      containers:
+        - name: image-pull
+          image: registry.cn-hangzhou.aliyuncs.com/geekcloud/image-pull-server
+          imagePullPolicy: Always
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "0"
+          ports:
+            - containerPort: 50051
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: image-pull
+  namespace: image-pull
+spec:
+  sessionAffinity: ClientIP
+  type: LoadBalancer
+  selector:
+    app: image-pull
+  ports:
+    - name: image-pull
+      protocol: TCP
+      port: 50051
+      targetPort: 50051
