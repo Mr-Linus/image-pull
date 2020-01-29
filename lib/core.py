@@ -44,7 +44,6 @@ def Check(ImageName):
 
 
 def Sync(ImageName):
-
     try:
         namespace, nametag = ImageName.split('/')[-2:]
         imagename, tag = nametag.split(':')
