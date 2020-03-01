@@ -2,15 +2,17 @@ import docker
 import settings
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.acs_exception.exceptions import ServerException
-from aliyunsdkcr.request.v20160607 import GetImageLayerRequest
+from aliyunsdkcr.request.v20160607 import GetImageLayerRequest,CreateRepoRequest
 
 
 def Check(ImageName):
     apiClient = AcsClient(settings.id, settings.key, settings.Region_id)
     namespace, nametag = ImageName.split('/')[-2:]
-    image, tag = nametag.split(':')
-    if tag is None:
+    if ":" in nametag:
+        image, tag = nametag.split(':')
+    else:
         tag = "latest"
+        image = nametag
     try:
         request = GetImageLayerRequest.GetImageLayerRequest()
         request.set_RepoName(image)
@@ -33,23 +35,16 @@ def Check(ImageName):
                 tag)
             return 0, settings.RepoUrl + "/" + settings.RepoNamespace + "/" + image + ":" + tag
     except ServerException:
-        print("The image repo does not exists,trying to create it.")
-        """
-        request = CreateRepoRequest.CreateRepoRequest()
-        request.add_path_param("RepoName", image+"/")
-        response = eval(client.AcsClient(settings.id, settings.key, 'cn-hangzhou').do_action_with_exception(request).
-                        decode('utf-8'))
-        """
         return 1, ""
 
 
 def Sync(ImageName):
-    try:
-        namespace, nametag = ImageName.split('/')[-2:]
+    namespace, nametag = ImageName.split('/')[-2:]
+    if ":" in nametag:
         imagename, tag = nametag.split(':')
-    except BaseException:
-        print("Image Name Error: " + ImageName)
-        return 1, ""
+    else:
+        imagename = nametag
+        tag = "latest"
     docker_client = docker.from_env()
     try:
         docker_client.api.login(
@@ -99,5 +94,5 @@ def Sync(ImageName):
 
 
 if __name__ == '__main__':
-    Check(ImageName="k8s.gcr.io/kube-proxy-amd64:v1.11.0")
+    Sync(ImageName="quay.io/coreos/flannel:lastest")
     # print("quay.io/coreos/flannel:lastest".split("/")[-2:])
