@@ -43,12 +43,6 @@ jobs:
         sudo apt-get install dpkg
         sudo apt-get install -y kubelet kubeadm kubectl
         sudo apt-mark hold kubelet kubeadm kubectl
-    - name: Build ImagePull Dependencies
+    - name: Test Build
       run: |
-        pip install -r requirements.txt
-    - name: Push Docker Images
-      run: |
-        /bin/bash push-images.sh
-    - name: Push K8S Images
-      run: |
-        /bin/bash push-k8s.sh 
+        make local
